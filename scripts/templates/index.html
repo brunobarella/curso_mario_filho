@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1 class="my-4">YouTube Video Recomender</h1>
+  {% if videos|length < 1 %}
+  <p>There is nothing to recomender for now.</p>
+  {% else %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Score</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for video in videos %}
+      <tr>
+        <td><a href="{{ video.video_id }}"">{{ video.title }}</a></td>
+        <td>{{ video.score }}</td>
+        <td class="text-right"><a class="btn btn-danger btn-sm" href="/delete?id={{ video.video_id }}" role="button">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  <!--
+
+ <button class="btn btn-primary btn-block" href="/predict ">New Prediction</button>
+  -->
+  
+  <div class="text-center">
+    <td class="text-right"><a class="btn btn-primary" href="/predict" role="button">New Prediction</a></td>
+  </div>
+</div>
+{% endblock content %}
